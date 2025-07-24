@@ -13,5 +13,11 @@ FROM gcr.io/distroless/cc-debian12
 COPY --from=build /pogocache /app
 WORKDIR /app
 EXPOSE 9401
-
+ARG AUTH
+ARG THREADS
+ARG SHARDS
+ARG MAXCONNS
+ARG MAXMEMORY
+ARG EVICT
+ARG PERSIST
 ENTRYPOINT ["./pogocache","-h","0.0.0.0", "--auth","${AUTH}", "--threads","${THREADS}", "--shards","${SHARDS}", "--maxconns","${MAXCONNS}", "--maxmemory","${MAXMEMORY}", "--evict","${EVICT}","--persist","${PERSIST}"]
