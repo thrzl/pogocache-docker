@@ -11,13 +11,7 @@ RUN make
 
 FROM debian:stable-slim
 COPY --from=build /pogocache /app
+COPY /entrypoint.sh /app
 WORKDIR /app
 EXPOSE 9401
-ARG AUTH
-ARG THREADS
-ARG SHARDS
-ARG MAXCONNS
-ARG MAXMEMORY
-ARG EVICT
-ARG PERSIST
-ENTRYPOINT ["/bin/sh", "-c", "exec ./pogocache -h 0.0.0.0 --auth \"${AUTH}\" --threads ${THREADS} --shards ${SHARDS} --maxconns ${MAXCONNS} --maxmemory ${MAXMEMORY} --evict ${EVICT} --persist \"${PERSIST}\""]
+ENTRYPOINT ["/bin/bash", "./entrypoint.sh"]
