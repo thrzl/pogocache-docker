@@ -7,13 +7,9 @@ RUN apt-get update && apt-get install build-essential wget -y
 FROM prep as build
 RUN git clone https://github.com/tidwall/pogocache
 WORKDIR /pogocache
-RUN ls -l
 RUN make
-RUN ls -l
-# COPY /pogocache/pogocache /app
 
 FROM gcr.io/distroless/cc-debian12
-# FROM build as runtime
 COPY --from=build /pogocache /app
 WORKDIR /app
 EXPOSE 9401
