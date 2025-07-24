@@ -20,5 +20,4 @@ ARG MAXCONNS
 ARG MAXMEMORY
 ARG EVICT
 ARG PERSIST
-# CMD ["./pogocache","-h","0.0.0.0", "--auth","\"${AUTH}\"", "--threads","${THREADS}", "--shards","${SHARDS}", "--maxconns","${MAXCONNS}", "--maxmemory","$MAXMEMORY","--persist","${PERSIST}"]
-ENTRYPOINT "./pogocache -h 0.0.0.0 --auth ${AUTH} --threads ${THREADS} --shards ${SHARDS} --maxconns ${MAXCONNS} --maxmemory ${MAXMEMORY} --evict ${EVICT} --persist ${PERSIST}"
+ENTRYPOINT ["/bin/sh", "-c", "exec ./pogocache -h 0.0.0.0 --auth \"${AUTH}\" --threads ${THREADS} --shards ${SHARDS} --maxconns ${MAXCONNS} --maxmemory ${MAXMEMORY} --evict ${EVICT} --persist \"${PERSIST}\""]
